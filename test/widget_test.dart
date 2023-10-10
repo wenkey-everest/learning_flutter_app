@@ -7,24 +7,29 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:learning_flutter_app/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Should render InputField, button and text',
+      (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const FindEvenOrOdd());
 
     // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.byType(TextField), findsOneWidget);
+    expect(find.byKey(const Key("check-button")), findsOneWidget);
+    expect(find.text('Even or Odd'), findsOneWidget);
+  });
+  testWidgets("Should check the given number is Even or Odd",
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const FindEvenOrOdd());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    expect(find.text('Even'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField), "101");
+    await tester.tap(find.byKey(const Key("check-button")));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Odd'), findsOneWidget);
   });
 }
