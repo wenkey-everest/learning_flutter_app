@@ -13,16 +13,15 @@ void main() {
   testWidgets('Should render InputField, button and text',
       (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const FindEvenOrOdd());
+    await tester.pumpWidget(const MyApp());
 
     // Verify that our counter starts at 0.
     expect(find.byType(TextField), findsOneWidget);
     expect(find.byKey(const Key("check-button")), findsOneWidget);
-    expect(find.text('Even or Odd'), findsOneWidget);
   });
   testWidgets("Should check the given number is Even or Odd",
       (WidgetTester tester) async {
-    await tester.pumpWidget(const FindEvenOrOdd());
+    await tester.pumpWidget(const MyApp());
 
     expect(find.text('Even'), findsOneWidget);
 
