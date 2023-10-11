@@ -1,4 +1,6 @@
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:learning_flutter_app/cutsom_list_tile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,60 +14,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  int _number = 0;
-  String status = "Even";
-
-  final textEditingController = TextEditingController();
-
-  void checkEvenOrOdd(String value) {
-    setState(() {
-      try {
-        _number = int.parse(value);
-        status = setResult();
-      } on FormatException catch (_) {
-        throw const FormatException(
-            "You have entered other than integer string");
-      }
-    });
-  }
-
-  String setResult() => (_number % 2 == 0) ? "Even" : "Odd";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: findEvenOrOdd(textEditingController, checkEvenOrOdd, status));
+      home: listViewWidget(),
+    );
   }
 }
 
-Widget findEvenOrOdd(TextEditingController textEditingController,
-    Function checkEvenOrOdd, String status) {
+Widget listViewWidget() {
+  final items =
+      List<CustomListTile>.generate(1000, (i) => Heading('Heading $i'));
   return Scaffold(
-    appBar: AppBar(title: const Text("Find Even or Odd")),
-    body: Padding(
-      padding: const EdgeInsets.all(22.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          TextField(
-            controller: textEditingController,
-            decoration: const InputDecoration(border: OutlineInputBorder()),
-          ),
-          ElevatedButton(
-            key: const Key("check-button"),
-            onPressed: () {
-              checkEvenOrOdd(textEditingController.text.isEmpty
-                  ? "2"
-                  : textEditingController.text);
-            },
-            child: const Text("Check"),
-          ),
-          Text(
-            status,
-            style: const TextStyle(fontSize: 22),
-          ),
-        ],
+      appBar: AppBar(
+        title: const Text("ListView"),
       ),
-    ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return customListTile(items[index], context);
+        },
+      ));
+}
+
+Widget customListTile(CustomListTile tile, BuildContext context) {
+  return ListTile(
+    title: tile.buildTitle(context),
+    subtitle: tile.buildSubTitle(context),
   );
 }
