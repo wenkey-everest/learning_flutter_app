@@ -13,7 +13,7 @@ void main() {
   testWidgets('Should render InputField, button and text',
       (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp());
 
     // Verify that our counter starts at 0.
     expect(find.byType(TextField), findsOneWidget);
@@ -21,7 +21,7 @@ void main() {
   });
   testWidgets("Should check the given number is Even or Odd",
       (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp());
 
     expect(find.text('Even'), findsOneWidget);
 

@@ -1,45 +1,23 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_flutter_app/cutsom_list_tile.dart';
+import 'package:learning_flutter_app/screens/details_screen.dart';
+import 'package:learning_flutter_app/screens/home_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyApp();
-}
-
-class _MyApp extends State<MyApp> {
+  final routes = <String, Widget Function(BuildContext)>{
+    "/details": (context) => const DetailsScreen(),
+  };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: listViewWidget(),
+      routes: routes,
+      home: HomeScreen(),
     );
   }
-}
-
-Widget listViewWidget() {
-  final items =
-      List<CustomListTile>.generate(1000, (i) => Heading('Heading $i'));
-  return Scaffold(
-      appBar: AppBar(
-        title: const Text("ListView"),
-      ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return customListTile(items[index], context);
-        },
-      ));
-}
-
-Widget customListTile(CustomListTile tile, BuildContext context) {
-  return ListTile(
-    title: tile.buildTitle(context),
-    subtitle: tile.buildSubTitle(context),
-  );
 }
