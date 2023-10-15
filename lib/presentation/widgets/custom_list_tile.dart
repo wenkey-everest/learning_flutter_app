@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter_app/cutsom_list_tile.dart';
+import 'package:go_router/go_router.dart';
+import 'package:learning_flutter_app/domain/modals/custom_list_modal.dart';
 
 Widget customListTile(CustomListTile tile, BuildContext context) {
   return ListTile(
     title: tile.buildTitle(context),
     subtitle: tile.buildSubTitle(context),
     onTap: () {
-      Navigator.pushNamed(context, "/details", arguments: <String, Widget>{
+      context.goNamed("DetailsScreen", extra: <String, Widget>{
         "title": tile.buildTitle(context),
         "subtitle": tile.buildSubTitle(context)
       });

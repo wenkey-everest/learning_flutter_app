@@ -1,23 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter_app/screens/details_screen.dart';
-import 'package:learning_flutter_app/screens/home_screen.dart';
+import 'package:learning_flutter_app/config/router.dart';
+import 'package:learning_flutter_app/config/theme.dart';
+import 'package:learning_flutter_app/presentation/providers/counter_provider.dart';
+import 'package:learning_flutter_app/presentation/providers/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final routes = <String, Widget Function(BuildContext)>{
-    "/details": (context) => const DetailsScreen(),
-  };
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: routes,
-      home: HomeScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CounterProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              ThemeProvider(),
+        )
+      ],
+      child: Builder(builder: (context) {
+        return MaterialApp.router(
+          theme: themeData,
+          routerConfig: router,
+          darkTheme: ThemeData(brightness: Brightness.dark, useMaterial3: true),
+          themeMode: context.watch<ThemeProvider>().theme,
+          debugShowCheckedModeBanner: false,
+        );
+      }),
     );
   }
 }

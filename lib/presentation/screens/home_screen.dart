@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:learning_flutter_app/cutsom_list_tile.dart';
-import 'package:learning_flutter_app/widgets/custom_list_tile.dart';
+import 'package:learning_flutter_app/domain/modals/custom_list_modal.dart';
+import 'package:learning_flutter_app/presentation/widgets/custom_list_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
