@@ -28,6 +28,12 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationUsageDescription</key>
+	<string>location Usage</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>hello world</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>hello world2</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

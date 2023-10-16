@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:learning_flutter_app/presentation/providers/counter_provider.dart';
+import 'package:learning_flutter_app/presentation/counter/cubit/counter_cubit.dart';
 import 'package:learning_flutter_app/presentation/providers/theme_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -9,14 +11,25 @@ class DetailsScreen extends StatelessWidget {
 
   final Map<String, Widget> extra;
 
+  void checkPermission(Permission permission) async {
+    permission.request();
+    var status = await permission.status;
+
+    if (status.isDenied) {
+      print("Permission is denied");
+    } else if (status.isGranted) {
+      print("Permission is granted");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Details Screen"),
       ),
-      body: Consumer<CounterProvider>(
-        builder: (BuildContext context, provider, Widget? child) {
+      body: BlocBuilder<CounterCubit, int>(
+        builder: (context, state) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +39,7 @@ class DetailsScreen extends StatelessWidget {
                   children: <Widget>[
                     ElevatedButton(
                       onPressed: () {
-                        provider.increment();
+                        context.read<CounterCubit>().increment();
                       },
                       child: const Icon(Icons.add),
                     ),
@@ -34,7 +47,7 @@ class DetailsScreen extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      '${provider.number}',
+                      '$state',
                       style: const TextStyle(fontSize: 40),
                     ),
                     const SizedBox(
@@ -42,7 +55,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        provider.decrement();
+                        context.read<CounterCubit>().decrement();
                       },
                       child: const Icon(Icons.remove),
                     )
@@ -61,7 +74,12 @@ class DetailsScreen extends StatelessWidget {
                       Provider.of<ThemeProvider>(context, listen: false)
                           .toggleTheme();
                     },
-                    child: const Text("theme"))
+                    child: const Text("theme")),
+                ElevatedButton(
+                    onPressed: () {
+                      checkPermission(Permission.location);
+                    },
+                    child: const Text("Show Permission"))
               ],
             ),
           );

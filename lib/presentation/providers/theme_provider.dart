@@ -8,7 +8,7 @@ class ThemeProvider with ChangeNotifier {
 
   _getTheme() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool("is_dark")!) {
+    if (prefs.getBool("is_dark") ?? true) {
       theme = ThemeMode.dark;
     } else {
       theme = ThemeMode.light;
