@@ -20,8 +20,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CounterProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) =>
-              ThemeProvider(),
+          create: (context) => ThemeProvider(),
         )
       ],
       child: Builder(builder: (context) {
