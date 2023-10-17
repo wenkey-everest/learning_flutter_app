@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:learning_flutter_app/domain/modals/custom_list_modal.dart';
+import 'package:learning_flutter_app/domain/modals/article.dart';
 
-Widget customListTile(CustomListTile tile, BuildContext context) {
+Widget customListTile(Article article, BuildContext context) {
   return ListTile(
-    title: tile.buildTitle(context),
-    subtitle: tile.buildSubTitle(context),
+    title: Text(article.title!),
+    subtitle: Text(article.content ?? "content is null"),
     onTap: () {
-      context.goNamed("DetailsScreen", extra: <String, Widget>{
-        "title": tile.buildTitle(context),
-        "subtitle": tile.buildSubTitle(context)
+      context.goNamed("DetailsScreen", extra: <String, String>{
+        "title": article.title!,
+        "subtitle": article.content!
       });
     },
   );

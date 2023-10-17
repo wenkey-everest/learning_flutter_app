@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_flutter_app/config/router.dart';
 import 'package:learning_flutter_app/config/theme.dart';
 import 'package:learning_flutter_app/presentation/counter/cubit/counter_cubit.dart';
-import 'package:learning_flutter_app/presentation/providers/counter_provider.dart';
-import 'package:learning_flutter_app/presentation/providers/theme_provider.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
