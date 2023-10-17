@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learning_flutter_app/config/router.dart';
 import 'package:learning_flutter_app/config/theme.dart';
+import 'package:learning_flutter_app/locator.dart';
 import 'package:learning_flutter_app/presentation/counter/cubit/counter_cubit.dart';
 
-void main() {
+Future<void> main() async {
+  await initialize();
   runApp(const MyApp());
 }
 
