@@ -6,6 +6,7 @@ import 'package:learning_flutter_app/locator.dart';
 import 'package:learning_flutter_app/presentation/counter/cubit/counter_cubit.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await initialize();
   runApp(const MyApp());
 }

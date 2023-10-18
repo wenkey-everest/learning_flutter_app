@@ -1,4 +1,4 @@
-import 'package:learning_flutter_app/data/news_api_service.dart';
+import 'package:learning_flutter_app/data/remote/news_api_service.dart';
 import 'package:learning_flutter_app/domain/modals/article.dart';
 import 'package:learning_flutter_app/domain/repository/remote_news_repository.dart';
 

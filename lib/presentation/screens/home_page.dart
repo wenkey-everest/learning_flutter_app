@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:learning_flutter_app/domain/repository/local_news_repository.dart';
 import 'package:learning_flutter_app/domain/repository/remote_news_repository.dart';
 import 'package:learning_flutter_app/locator.dart';
 import 'package:learning_flutter_app/presentation/bloc/news_bloc.dart';
@@ -11,9 +12,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          NewsBloc(newsRepository: sl.get<RemoteNewsRepository>())
-            ..add(NewsFetched()),
+      create: (context) => NewsBloc(
+        newsRepository: sl.get<RemoteNewsRepository>(),
+        localNewsRepository: sl.get<LocalNewsRepository>(),
+      )..add(NewsFetched()),
       child: const HomeScreen(),
     );
   }
